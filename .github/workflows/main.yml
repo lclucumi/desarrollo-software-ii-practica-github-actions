@@ -4,17 +4,22 @@ on:
   push:
     branches: [main]
 
-permissions: 
+permissions:
+  contents: read
+
+jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@v6
+
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: '25'
 
-      - name: Construir y ejecurar pruebas
+      - name: Construir y ejecutar pruebas
         run: ./gradlew clean build
 
       - name: Guardar reporte de pruebas
