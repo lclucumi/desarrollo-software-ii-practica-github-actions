@@ -12,29 +12,28 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Obtener el código
-        uses: actions/checkout@v4
-
-      - name: Preparar Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '25'
-
-      - name: Preparar Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Construir y ejecutar pruebas
-        run: ./gradlew clean build
-
-      - name: Guardar el reporte de pruebas
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: reporte_pruebas
-          path: build/reports/tests/test/
-          if-no-files-found: warn
-
+      steps:
+        - name: Obtener el código
+          uses: actions/checkout@v7
+          
+        - name: Preparar Java
+          uses: actions/setup-java@v6
+          with:
+            distribution: temurin
+            java-version: '21'
+    
+        - name: Preparar Gradle
+          uses: gradle/actions/setup-gradle@v6
+    
+        - name: Construir y ejecutar pruebas
+          run: ./gradlew clean build
+    
+        - name: Guardar el reporte de pruebas
+          if: always()
+          uses: actions/upload-artifact@v7
+          with:
+            name: reporte-pruebas
+            path: build/reports/tests/test/
+            if-no-files-found: warn
