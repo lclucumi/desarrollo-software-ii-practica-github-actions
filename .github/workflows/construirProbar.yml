@@ -4,8 +4,9 @@ name: Construir y probar
 on:
   push:
   pull_request:
-    branches:
-      - practica/sebastian-devia
+    branches: [practica/sebastian-devia]
+
+
 
 permissions:
   contents: read
