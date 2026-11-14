@@ -10,9 +10,9 @@ permissions:
 
 jobs:
   build:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-steps:
+    steps:
     - name: Obtener el código
       uses: actions/checkout@uv7
 
@@ -26,10 +26,10 @@ steps:
       uses: gradle/actions/setup-gradle@v6
 
     - name: Construir y Ejecutar pruebas
-      uses: ./gradlew clean build
+      run: ./gradlew clean build
 
     - name: Guardar el reporte de pruebas
-    if: always()
+      if: always()
       uses: actions/upload-artifact@v7
       with:
          name: Reporte-pruebas
