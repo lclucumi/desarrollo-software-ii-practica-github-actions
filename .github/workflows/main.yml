@@ -1,0 +1,34 @@
+name: construir y probar
+
+on:
+  push:
+    branches: [practica/yilmar]
+  pull_request:
+    branches: [practica/yilmar]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Preparar Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Construir y ejecutar pruebas
+        run: ./gradlew clean build
+
+      - name: Guardar el reporte de pruebas
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reporte-pruebas-gradle
+          path: build/reports/tests/test/
