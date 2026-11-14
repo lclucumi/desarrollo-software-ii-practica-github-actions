@@ -6,13 +6,13 @@ on:
     branches: [ practica/Nicolle-Hoyos ]
 
 permissions:
-  contests: read
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     
-    Steps: 
+    steps: 
       - name: Obtener el codigo
         uses: actions/checkout@v7
         
@@ -22,19 +22,19 @@ jobs:
           distribution: temurin
           java-version: '21'
   
-        - name: Preparar Gradle
-          uses: gradle/actions/setuo-gradle@v6
+      - name: Preparar Gradle
+        uses: gradle/actions/setuo-gradle@v6
   
-        - name: Construir y ejecutar pruebas
-          uses: ./gradlew clean build
+      - name: Construir y ejecutar pruebas
+        run: ./gradlew clean build
   
-        - neme: Guardar el reporte de pruebas
-          if: always()
-          uses: actions/upload-artifact@v7
-          with:
-            name: reporte-pruebas
-            path: build/reports/tests/test
-            if-no-files-found: warn
+      - name: Guardar el reporte de pruebas
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: reporte-pruebas
+          path: build/reports/tests/test
+          if-no-files-found: warn
 
 
         
