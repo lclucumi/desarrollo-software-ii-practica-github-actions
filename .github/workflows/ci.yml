@@ -27,7 +27,7 @@ jobs:
       uses: gradle/actions/setup-gradle@v6
 
     - name: construir y ejecutar pruebas 
-      uses: ./gradlew cleam build
+      run: ./gradlew cleam build
 
     - name: guardar el repo de prueba
       if: always()
