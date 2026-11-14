@@ -1,8 +1,8 @@
 name: Construir y probar
 
 on:
-  push:
-  pull_request:
+  push: 
+  pull_request: 
     branches: [ practica/Nicolle-Hoyos ]
 
 permissions:
@@ -10,32 +10,33 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Obtener el código
+          uses: actions/checkout@v7
+          
+        - name: Preparar Java
+          uses: actions/setup-java@v6
+          with:
+            distribution: temurin
+            java-version: '21'
     
-    steps: 
-    - name: Obtener el codigo
-      uses: actions/checkout@v7
-        
-    - name: Preparar Java
-      uses: actions/setup-java@v6
-      with:
-        distribution: temurin
-        java-version: '21'
-  
-    - name: Preparar Gradle
-      uses: gradle/actions/setuo-gradle@v6
-  
-    - name: Construir y ejecutar pruebas
-      run: ./gradlew clean build
-  
-    - name: Guardar el reporte de pruebas
-      if: always()
-      uses: actions/upload-artifact@v7
-      with:
-        name: reporte-pruebas
-        path: build/reports/tests/test
-        if-no-files-found: warn
+        - name: Preparar Gradle
+          uses: gradle/actions/setup-gradle@v6
+    
+        - name: Construir y ejecutar pruebas
+          run: ./gradlew clean build
+    
+        - name: Guardar el reporte de pruebas
+          if: always()
+          uses: actions/upload-artifact@v7
+          with:
+            name: reporte-pruebas
+            path: build/reports/tests/test/
+            if-no-files-found: warn
+          
+      
 
-
-        
-        
+    
+      
