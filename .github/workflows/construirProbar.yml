@@ -1,0 +1,35 @@
+name: construir y probar
+on:
+  push:
+  pull_request:
+    branches: - practica/sebastian-devia
+
+permissions:
+  constest: read
+  
+jobs:
+  build:
+      runs-on: ubuntu-lastest
+  steps:
+    - name: obtener el codigo
+      uses: actions/checkout@v7
+    - name: preparar java
+    uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: '25'
+
+    - name: preparar gradle
+     uses: gradle/actions/setup-gradle@v6
+
+    - name: construir y ejecutar pruebas
+      uses: ./gradlwe clean build
+
+    - name: guarda el reporte de prueba
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: reporte_pruebas
+        path: build/reports/tests/test/
+        if-no-files-found: warn
+    
