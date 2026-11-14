@@ -1,0 +1,37 @@
+name: Construir y Probar
+
+on:
+  push:
+  pull_request:
+    branches: [practica/Juan-Navarrete]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+  steps:
+    - name: obtener el codigo
+      uses: actions/checkout@v7
+      
+    - name: Preparar Java
+      uses: actions/setup-java@v6
+      with:
+        distribution: temurin
+        java-version: '25'
+
+    - name: Preparar Gradle
+      uses: gradle/actions/setup-gradle@v6
+
+    - name: Construir y Ejecutar Pruevas
+      uses: ./gradlew clean build
+
+    - name: Guardar el reporte de pruebas
+      if: always()
+      uses: actions/upload-artifact@v7
+      with:
+        name: Reporte-Pruebas
+        path: build/reports/tests/test/ 
+        if-no-files-found: warn
