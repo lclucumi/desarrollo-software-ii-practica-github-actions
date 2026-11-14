@@ -28,7 +28,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
   
       - name: Construir y ejecutar pruebas
-        uses: ./gradlew clean build 
+        run: ./gradlew clean build 
   
       - name: Guardar el reporte de pruebas 
         if: always()     
