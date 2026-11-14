@@ -1,12 +1,9 @@
-
 name: Construir y probar
 
 on:
-  push:
-  pull_request:
-    branches: [practica/sebastian-devia]
-
-
+  push: 
+  pull_request: 
+    branches: [ practica/sebastian-devia]
 
 permissions:
   contents: read
