@@ -9,7 +9,7 @@ class DemostracionPruebasFallidasTest {
         DeliveryCostCalculator calculador = new DeliveryCostCalculator();
         double resultado = calculador.calculate(5.0, true);
         // Fallo intencional: 15000 es incorrecto; el esperado real es 12500.
-        assertEquals(12500.0, resultado, 0.001);
+        assertEquals(15000.0, resultado, 0.001);
     }
 
     @Test
@@ -17,6 +17,6 @@ class DemostracionPruebasFallidasTest {
         DeliveryCostCalculator calculador = new DeliveryCostCalculator();
         double resultado = calculador.calculate(5.0, false);
         // Fallo intencional: 12000 es incorrecto; el esperado real es 10000.
-        assertEquals(10000.0, resultado, 0.001);
+        assertEquals(12000.0, resultado, 0.001);
     }
 }
